@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
 
   def create
     @profile = Profile.new(profile_params)
+    @profile.user_id = current_user.id
     if @profile.save
       flash[:nitice] = 'プロフィールを登録しました'
       redirect_to @profile
@@ -32,7 +33,7 @@ class ProfilesController < ApplicationController
 
   private
     def set_profile
-      @profile = Profile.find_by(id: params[:id])
+      @profile = current_user.profile
     end
 
     def profile_params
