@@ -1,0 +1,12 @@
+<% if @profile %>
+  <h1><%= @profile.name %>のページ</h1>
+
+  <p>メールアドレス: <%= current_user.email %></p>
+  <p>生年月日: <%= @profile.birthday %></p>
+  <p>性別: <%= @profile.sex %></p>
+  <p>学校名: <%= @profile.school %></p>
+
+  <%= link_to "プロフィール編集", edit_profile_path(current_user.id) %>
+<% else %>
+  <%= link_to "プロフィール登録", new_profile_path %>
+<% end %>
