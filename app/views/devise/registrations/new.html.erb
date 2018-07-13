@@ -27,8 +27,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :birthday, '生年月日(例:20180701)' %><br />
-    <%= f.text_field :birthday %>
+    <%= f.label :birthday, '生年月日' %><br />
+    <%= f.date_select :birthday, start_year: 1930, end_year: Time.now.year %>
   </div>
 
   <div class="field">
