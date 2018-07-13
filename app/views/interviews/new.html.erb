@@ -1,0 +1,9 @@
+<h1><%= current_user.name %>さんの新規面談作成</h1>
+
+<%= form_with(model: @interview, local: true, url: user_interviews_path) do |f| %>
+  <div>
+    <%= f.label :day, '開始時刻' %>
+    <%= f.datetime_select :day %>
+  </div>
+  <%= f.submit '登録' %>
+<% end %>

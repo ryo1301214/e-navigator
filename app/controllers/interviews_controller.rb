@@ -8,10 +8,9 @@ class InterviewsController < ApplicationController
   end
 
   def create
-    @interview = Interview.new(interview_params)
-    @interview.user_id = current_user.id
+    @interview = current_user.interviews.build(interview_params)
     if @interview.save
-      redirect_to :new
+      redirect_to user_interviews_path, notice: '面談を登録しました'
     else
       render :new
     end
@@ -19,6 +18,6 @@ class InterviewsController < ApplicationController
 
   private
     def interview_params
-      params.require(interview).permit(:day, :admission)
+      params.require(:interview).permit(:day)
     end
 end
