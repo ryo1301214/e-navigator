@@ -1,0 +1,9 @@
+<h1>面談日時の編集</h1>
+
+<%= form_with(model: @interview, local: true, url: user_interview_path) do |f| %>
+  <div>
+    <%= f.label :day, '開始時刻' %>
+    <%= f.datetime_select :day, start_year: Time.now.year %>
+  </div>
+  <%= f.submit '編集' %>
+<% end %>
