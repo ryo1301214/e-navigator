@@ -7,7 +7,7 @@
   </tr>
   <% @interviews.each do |interview| %>
   <tr>
-    <td><%= interview.day %></td>
+    <td><%= interview.day.strftime("%Y-%m-%d %H:%M") %></td>
     <td><%= interview.admission %></td>
     <td><%= link_to '編集', edit_user_interview_path(id: interview.id, user_id: current_user.id) %></td>
     <td><%= link_to '削除', user_interview_path(id: interview.id, user_id: current_user.id),
