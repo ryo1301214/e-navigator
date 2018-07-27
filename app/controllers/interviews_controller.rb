@@ -1,6 +1,6 @@
 class InterviewsController < ApplicationController
   def index
-    @interviews = current_user.interviews
+    @interviews = User.find_by(id: params[:user_id]).interviews
   end
 
   def new

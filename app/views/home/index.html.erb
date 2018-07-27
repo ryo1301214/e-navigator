@@ -1,1 +1,25 @@
 <h1>e-navigator</h1>
+
+<p>ユーザー一覧</p>
+
+<table>
+  <tr>
+    <th>名前</th>
+    <th>メールアドレス</th>
+    <th>年齢</th>
+    <th>性別</th>
+    <th>学校名</th>
+    <th>面接日時</th>
+  </tr>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= ( Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i ) / 10000 %></td>
+    <td><%= user.sex %></td>
+    <td><%= user.school %></td>
+    <td></td>
+    <td><%= link_to '面接一覧', user_interviews_path(user) %></td>
+  </tr>
+  <% end %>
+</table>
