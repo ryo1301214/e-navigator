@@ -1,4 +1,4 @@
-<h1><%= current_user.name %>さんの面談一覧</h1>
+<h1><%= @user.name %>さんの面談一覧</h1>
 
 <table>
   <tr>
@@ -9,8 +9,8 @@
   <tr>
     <td><%= interview.day.strftime("%Y-%m-%d %H:%M") %></td>
     <td><%= interview.admission %></td>
-    <td><%= link_to '編集', edit_user_interview_path(id: interview.id, user_id: current_user.id) %></td>
-    <td><%= link_to '削除', user_interview_path(id: interview.id, user_id: current_user.id),
+    <td><%= link_to '編集', edit_user_interview_path(id: interview.id) %></td>
+    <td><%= link_to '削除', user_interview_path(id: interview.id),
                                   method: :delete, data: {confirm:'削除していいですか？'} %></td>
   </tr>
   <% end %>

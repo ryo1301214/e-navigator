@@ -12,14 +12,17 @@
     <th>面接日時</th>
   </tr>
   <% @users.each do |user| %>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= user.email %></td>
-    <td><%= ( Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i ) / 10000 %></td>
-    <td><%= user.sex %></td>
-    <td><%= user.school %></td>
-    <td></td>
-    <td><%= link_to '面接一覧', user_interviews_path(user) %></td>
-  </tr>
+    <% if user == current_user %>
+    <% else %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= ( Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i ) / 10000 %></td>
+        <td><%= user.sex %></td>
+        <td><%= user.school %></td>
+        <td></td>
+        <td><%= link_to '面談一覧', user_interviews_path(user) %></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
