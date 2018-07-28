@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20180713081735) do
 
   create_table "interviews", force: :cascade do |t|
     t.datetime "day"
-    t.boolean "admission"
+    t.boolean "permission", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

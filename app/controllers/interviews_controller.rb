@@ -36,6 +36,14 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path, notice: '面談を削除しました'
   end
 
+  def permit
+    if User.find(params[:user_id]).interviews.find_by(permission: true)
+      User.find(params[:user_id]).interviews.find_by(permission: true).update(permission: false)
+    end
+    Interview.find(params[:id]).update(permission: true)
+    redirect_to user_interviews_path(params[:user_id]), notice: '面談を設定しました'
+  end
+
   private
     def interview_params
       params.require(:interview).permit(:day)
