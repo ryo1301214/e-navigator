@@ -1,8 +1,8 @@
 <h1><%= @user.name %>さんの面談日程</h1>
 
 <p>現在の面談日程:
-<% if @user.interviews.find_by(permission: true) %>
-  <%= @user.interviews.find_by(permission: true).day.strftime("%Y-%m-%d %H:%M") %>に面談が設定されています。</p>
+<% if @user.interviews.find_by(permission: 1) %>
+  <%= @user.interviews.find_by(permission: 1).day.strftime("%Y-%m-%d %H:%M") %>に面談が設定されています。</p>
 <% else %>
   面談日時が設定されていません</p>
 <% end %>

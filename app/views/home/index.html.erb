@@ -21,8 +21,8 @@
           <td><%= user.sex %></td>
           <td><%= user.school %></td>
           <td>
-            <% if user.interviews.find_by(permission: true) %>
-              <%= user.interviews.find_by(permission: true).day.strftime("%Y-%m-%d %H:%M") %>
+            <% if user.interviews.find_by(permission: 1) %>
+              <%= user.interviews.find_by(permission: 1).day.strftime("%Y-%m-%d %H:%M") %>
             <% else %>
               未設定
             <% end %>
