@@ -38,9 +38,9 @@ class InterviewsController < ApplicationController
 
   def permit
     if User.find(params[:user_id]).interviews.find_by(permission: 1)
-      User.find(params[:user_id]).interviews.find_by(permission: 1).update(permission: 2)
+      User.find(params[:user_id]).interviews.find_by(permission: 1).denied!
     end
-    Interview.find(params[:id]).update(permission: 1)
+    Interview.find(params[:id]).admitted!
     redirect_to user_interviews_path(params[:user_id]), notice: '面談を設定しました'
   end
 
