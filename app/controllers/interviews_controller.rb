@@ -19,6 +19,9 @@ class InterviewsController < ApplicationController
 
   def edit
     @interview = Interview.find(params[:id])
+    unless @interview.waiting?
+      redirect_to user_interviews_path, notice: 'この面談の承認状態は既に決定されています'
+    end
   end
 
   def update
@@ -37,11 +40,15 @@ class InterviewsController < ApplicationController
   end
 
   def permit
-    User.find(params[:user_id]).interviews.each do |interview|
-      interview.denied!
+    if Interview.find(params[:id]).day < Time.current
+      redirect_to user_interviews_path, notice: '面談日時が過ぎているので許可できません'
+    else
+      User.find(params[:user_id]).interviews.each do |interview|
+        interview.update_attribute(:permission, :denied)
+      end
+      Interview.find(params[:id]).admitted!
+      redirect_to user_interviews_path, notice: '面談を設定しました'
     end
-    Interview.find(params[:id]).admitted!
-    redirect_to user_interviews_path(params[:user_id]), notice: '面談を設定しました'
   end
 
   private
