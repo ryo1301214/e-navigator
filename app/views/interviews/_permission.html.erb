@@ -1,0 +1,21 @@
+<h1><%= @user.name %>さんの面談日程</h1>
+
+<p>現在の面談日程:
+<% if @user.interviews.find_by(permission: :admitted) %>
+  <%= @user.interviews.find_by(permission: :admitted).day.strftime("%Y-%m-%d %H:%M") %>に面談が設定されています。</p>
+<% else %>
+  面談日時が設定されていません</p>
+<% end %>
+
+<table>
+  <tr>
+    <th>面談開始時間</th>
+  </tr>
+  <% @interviews.order(:day).each do |interview| %>
+  <tr>
+    <td><%= interview.day.strftime("%Y-%m-%d %H:%M") %></td>
+    <td><%= link_to '面談日時に設定', permit_user_interview_path(id: interview.id, user_id: @user.id),
+                            method: :patch, data: {confirm:'面談日時に設定しますか？'} %></td>
+  </tr>
+  <% end %>
+</table>
