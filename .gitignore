@@ -148,3 +148,6 @@ build-iPhoneSimulator/
 ## Environment normalization:
 /.bundle/
 /lib/bundler/man/
+
+#dotenv-rails
+/.env
