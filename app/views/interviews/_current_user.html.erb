@@ -17,3 +17,13 @@
 </table>
 
 <%= link_to '新規面談作成', new_user_interview_path(user_id: current_user.id) %>
+
+<%= form_with(model: @user, local: true, url: request_user_interviews_path) do |f| %>
+  <div>
+    <%= f.label :day, '開始時刻' %>
+    <%= f.datetime_select :day, start_year: Time.current.year %>
+  </div>
+  <%= f.submit '登録' %>
+<% end %>
+
+<%= link_to '申請', request_user_interview_path() %>
