@@ -7,11 +7,10 @@ Rails.application.routes.draw do
     resources :interviews do
       member do
         patch 'permit'
-        get 'request'
       end
     end
   end
-
+  
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

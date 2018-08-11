@@ -39,10 +39,6 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path, notice: '面談を削除しました'
   end
 
-  def request
-    
-  end
-
   def permit
     if Interview.find(params[:id]).day < Time.current
       redirect_to user_interviews_path, notice: '面談日時が過ぎているので許可できません'
