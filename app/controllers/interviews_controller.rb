@@ -47,6 +47,8 @@ class InterviewsController < ApplicationController
         interview.update_attribute(:permission, :denied)
       end
       Interview.find(params[:id]).admitted!
+      InterviewMailer.decided_interview_to_user(current_user, Interview.find(params[:id])).deliver
+      InterviewMailer.decided_interview_to_interviewer(current_user, Interview.find(params[:id])).deliver
       redirect_to user_interviews_path, notice: '面談を設定しました'
     end
   end
