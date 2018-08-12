@@ -84,8 +84,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { host: "e-navigator-ryo1301214.herokuapp.com"}
 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: "e-navigator-ryo1301214.herokuapp.com"}
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address: 'smtp.gmail.com',
