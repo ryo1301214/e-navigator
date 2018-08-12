@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     resources :interviews do
       member do
-        patch 'permit'
+        patch :permit
+      end
+      collection do
+        get :request_permission
       end
     end
   end
-  
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
