@@ -17,3 +17,8 @@
 </table>
 
 <%= link_to '新規面談作成', new_user_interview_path(user_id: current_user.id) %>
+
+<%= form_for(@user, method: :get, url: request_permission_user_interviews_path) do |f| %>
+  <%= f.collection_select :id, User.where.not(id: current_user.id), :id, :name %>
+  <%= f.submit '面接官に面談日時を申請する' %>
+<% end %>

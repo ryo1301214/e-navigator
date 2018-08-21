@@ -1,4 +1,6 @@
 class InterviewsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @user = User.find(params[:user_id])
     @interviews = @user.interviews
@@ -39,6 +41,11 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path, notice: '面談を削除しました'
   end
 
+  def request_permission
+    InterviewMailer.request_interviewer(User.find(params[:user][:id]), current_user).deliver
+    redirect_to user_interviews_path, notice: '面談申請メールを送信しました'
+  end
+
   def permit
     if Interview.find(params[:id]).day < Time.current
       redirect_to user_interviews_path, notice: '面談日時が過ぎているので許可できません'
@@ -47,6 +54,8 @@ class InterviewsController < ApplicationController
         interview.update_attribute(:permission, :denied)
       end
       Interview.find(params[:id]).admitted!
+      InterviewMailer.decided_interview_to_user(current_user, Interview.find(params[:id])).deliver
+      InterviewMailer.decided_interview_to_interviewer(current_user, Interview.find(params[:id])).deliver
       redirect_to user_interviews_path, notice: '面談を設定しました'
     end
   end
